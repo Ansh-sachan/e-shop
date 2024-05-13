@@ -15,9 +15,9 @@ router.get('/register', (req, res, next) => {
 
 router.post('/register', (req, res, next) => {
   var { email, password } = req.body;
-  if (email && password) {
+  if (!email || !password) {
     req.flash('Email/password is required');
-    return res.redirect('/users/register');
+    return res.redirect('/users/login');
   }
   User.create(req.body).then((info) => res.redirect('/users/login'));
 });
@@ -36,11 +36,11 @@ router.post('/login', (req, res, next) => {
   }
   User.findOne({ email }).then((user) => {
     if (!user) {
-      req.flash('This Email is not yet registered');
-      return rea.redirect('/users/login');
+      req.flash('This Email is not registered');
+      return res.redirect('/users/login');
     }
     user.verifyPassword(password, (err, result) => {
-      if (err) next(err);
+      if (err) return next(err);
       if (!result) {
         req.flash('Password is incorrect');
         return res.redirect('/users/login');

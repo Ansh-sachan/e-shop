@@ -33,7 +33,7 @@ userSchema.pre('save', function (next) {
 
 userSchema.methods.verifyPassword = function (password, cb) {
   bcrypt.compare(password, this.password, (error, result) => {
-    return cb(err, result);
+    return cb(error, result);
   });
 };
 
