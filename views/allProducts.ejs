@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1><%= user.name %></h1>
+
+    <ul>
+      <% products.forEach(product =>{ %>
+      <li>
+        <h3><%= product.name %></h3>
+        <h3><%= product.price %></h3>
+        <span><%= product.quantity %></span>
+        <span>likes : <%= product.likes %></span>
+        <div>
+          <a href="/products/like"><button>Like</button></a>
+        </div>
+        <%= if(user.isAdmin){ %>
+        <div class="flex">
+          <div>
+            <a href="/products/<%= product.id %>/edit"><button>Edit</button></a>
+          </div>
+          <div>
+            <a href="/products/<%= product.id %>/delete"
+              ><button>Delete</button></a
+            >
+          </div>
+        </div>
+        <% } %>
+      </li>
+      <% }) %>
+    </ul>
+  </body>
+</html>
