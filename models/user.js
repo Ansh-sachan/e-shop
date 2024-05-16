@@ -5,7 +5,7 @@ var bcrypt = require('bcrypt');
 var userSchema = new Schema(
   {
     name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
+    email: { type: String, unique: true, required: true },
     password: { type: String, required: true, minlength: 4 },
     isAdmin: { type: Boolean, default: false },
     cart: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
@@ -14,7 +14,8 @@ var userSchema = new Schema(
 );
 
 userSchema.pre('save', function (next) {
-  let adminEmail = ['ansh@gmail.com'];
+  let adminEmail = ['admin@gmail.com'];
+  // pass -- admin
   if (this.password && this.isModified('password')) {
     bcrypt
       .hash(this.password, 10)

@@ -15,11 +15,22 @@ router.get('/register', (req, res, next) => {
 
 router.post('/register', (req, res, next) => {
   var { email, password } = req.body;
-  if (!email || !password) {
-    req.flash('Email/password is required');
-    return res.redirect('/users/login');
+  if (!email && !password) {
+    req.flash('error', 'Email/password is required');
+    return res.redirect('/users/register');
   }
-  User.create(req.body).then((info) => res.redirect('/users/login'));
+  User.create(req.body)
+    .then((info) => res.redirect('/users/login'))
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        req.flash('error', 'password must be greater than 4 digits');
+        return res.redirect('/users/register');
+      }
+      if (err.name === 'MongoServerError') {
+        req.flash('error', 'This email is already registered');
+        return res.redirect('/users/register');
+      }
+    });
 });
 
 // login
@@ -31,18 +42,18 @@ router.get('/login', (req, res, next) => {
 router.post('/login', (req, res, next) => {
   var { email, password } = req.body;
   if (!email || !password) {
-    req.flash('Email/Password is required');
+    req.flash('error', 'Email/Password is required');
     return res.redirect('/users/login');
   }
   User.findOne({ email }).then((user) => {
     if (!user) {
-      req.flash('This Email is not registered');
+      req.flash('error', 'This Email is not registered');
       return res.redirect('/users/login');
     }
     user.verifyPassword(password, (err, result) => {
       if (err) return next(err);
       if (!result) {
-        req.flash('Password is incorrect');
+        req.flash('error', 'Password is incorrect');
         return res.redirect('/users/login');
       } else {
         req.session.userId = user.id;

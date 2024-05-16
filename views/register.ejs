@@ -5,17 +5,99 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-    <% if(error) {%>
-    <p><%= error %></p>
-    <% } %>
-
-    <form action="/users/register" method="POST">
-      <input type="text" name="name" placeholder="add name" />
-      <input type="email" name="email" placeholder="add email" />
-      <input type="password" name="password" placeholder="add password" />
-      <button>submit</button>
-    </form>
+    <div class="mt-48">
+      <form
+        action="/users/register"
+        method="POST"
+        class="max-w-md mx-auto mt-8 p-6 bg-white shadow-md rounded-lg"
+      >
+        <div class="mb-4">
+          <label for="name" class="block text-gray-700 text-sm font-bold mb-2"
+            >Email</label
+          >
+          <div class="relative">
+            <input
+              class="appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-indigo-500"
+              type="text"
+              placeholder="Username"
+              name="name"
+              id="name"
+            />
+            <div
+              class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+            >
+              <i class="fas fa-envelope text-gray-400"></i>
+            </div>
+            <div
+              class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none"
+            >
+              <i class="fas fa-check text-gray-400"></i>
+            </div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <label for="email" class="block text-gray-700 text-sm font-bold mb-2"
+            >Email</label
+          >
+          <div class="relative">
+            <input
+              class="appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-indigo-500"
+              type="email"
+              placeholder="Email"
+              name="email"
+              id="email"
+            />
+            <div
+              class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+            >
+              <i class="fas fa-envelope text-gray-400"></i>
+            </div>
+            <div
+              class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none"
+            >
+              <i class="fas fa-check text-gray-400"></i>
+            </div>
+          </div>
+        </div>
+        <div class="mb-6">
+          <label
+            for="password"
+            class="block text-gray-700 text-sm font-bold mb-2"
+            >Password</label
+          >
+          <div class="relative">
+            <input
+              class="appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-indigo-500"
+              type="password"
+              placeholder="Password"
+              name="password"
+              id="password"
+            />
+            <div
+              class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+            >
+              <i class="fas fa-lock text-gray-400"></i>
+            </div>
+          </div>
+        </div>
+        <div class="mb-2">
+          <% if(error) {%>
+          <p class="text-red-500 p-3"><%= error %></p>
+          <% } %>
+        </div>
+        <div class="flex items-center justify-between">
+          <button
+            class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            Sign In
+          </button>
+        </div>
+      </form>
+    </div>
   </body>
 </html>

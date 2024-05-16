@@ -4,9 +4,235 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-    <a href="/users/login"><button>login</button></a>
-    <a href="/users/register"><button>register</button></a>
+    <nav class="bg-white shadow-lg">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex">
+            <div class="flex-shrink-0 flex items-center">
+              <h2 class="text-blue-600 text-xl">e-shop</h2>
+            </div>
+            <div class="hidden md:flex md:ml-6 md:space-x-8">
+              <a
+                href="#"
+                class="text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-indigo-500 text-sm font-medium"
+                >Home</a
+              >
+              <a
+                href="#"
+                class="text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium"
+                >Shop</a
+              >
+              <a
+                href="#"
+                class="text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium"
+                >About</a
+              >
+              <a
+                href="#"
+                class="text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium"
+                >Contact</a
+              >
+            </div>
+          </div>
+          <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+            <a
+              href="/users/Login"
+              class="text-gray-900 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium"
+              >Login</a
+            >
+            <a
+              href="/users/register"
+              class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+              >Sign Up</a
+            >
+          </div>
+          <div class="-mr-2 flex items-center md:hidden">
+            <button
+              type="button"
+              class="bg-gray-100 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Open main menu</span>
+              <!-- Heroicon name: menu -->
+              <svg
+                class="h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16m-7 6h7"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu, show/hide based on menu state. -->
+      <div class="md:hidden" id="mobile-menu">
+        <div class="pt-2 pb-3 space-y-1">
+          <a
+            href="#"
+            class="text-gray-900 block pl-3 pr-4 py-2 border-l-4 border-indigo-500 text-base font-medium"
+            >Home</a
+          >
+          <a
+            href="#"
+            class="text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium"
+            >Shop</a
+          >
+          <a
+            href="#"
+            class="text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium"
+            >About</a
+          >
+          <a
+            href="#"
+            class="text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium"
+            >Contact</a
+          >
+        </div>
+        <div class="pt-4 pb-3 border-t border-gray-200">
+          <div class="flex items-center px-4">
+            <div class="flex-shrink-0">
+              <img
+                class="h-10 w-10 rounded-full"
+                src="user-profile.jpg"
+                alt=""
+              />
+            </div>
+            <div class="ml-3">
+              <div class="text-base font-medium text-gray-800">John Doe</div>
+              <div class="text-sm font-medium text-gray-500">
+                john@example.com
+              </div>
+            </div>
+            <button
+              class="ml-auto bg-gray-100 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              <span class="sr-only">View notifications</span>
+              <!-- Heroicon name: bell -->
+              <svg
+                class="h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V4a2 2 0 10-4 0v1.341C7.67 7.165 7 8.97 7 11v3.159c0 .538-.214 1.055-.595 1.437L5 17h5m0 0v1a3 3 0 006 0v-1m-6 0a3 3 0 01-6 0"
+                />
+              </svg>
+            </button>
+          </div>
+          <div class="mt-3 space-y-1">
+            <a
+              href="#"
+              class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100"
+              >Your Profile</a
+            >
+            <a
+              href="#"
+              class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100"
+              >Settings</a
+            >
+            <a
+              href="#"
+              class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100"
+              >Sign out</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+    <section>
+      <div class="mt-20 mb-20">
+        <div class="container flex">
+          <div class="w-1/2">
+            <h1 class="text-blue-600 w-full ml-4 text-7xl mt-10 capitalize">
+              welcome to <span class="lowercase">e-shop</span>
+            </h1>
+          </div>
+          <div class="w-1/2">
+            <img
+              src="https://www.samsungmobilepress.com/file/2792F942A2A2123F030173931A3506693F1F0BF39CEB5BE58D55446CD8A4364370FB854B08F831A146DFC151E3EB85BD8FEC67F402DCF6AFAA1FE4058A429DED12142A032AAB1FCE138FD0078B104B95AAC1A7927213C22AA6D6D29ADDAF39519F70B87AF6816CAF2ECBFD1C19622FD5AD8804802C5FA1D782529E70C3ADE1D5"
+              alt="error to load"
+              class="ml-10 mt-10"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="bg-gray-800 text-white py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- About Us -->
+          <div>
+            <h3 class="text-lg font-semibold mb-4">About Us</h3>
+            <p class="text-sm">
+              We are committed to providing the best products at the most
+              affordable prices. Our mission is to deliver exceptional value and
+              quality to our customers.
+            </p>
+          </div>
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+            <ul class="text-sm space-y-2">
+              <li><a href="#" class="hover:underline">Home</a></li>
+              <li><a href="#" class="hover:underline">Shop</a></li>
+              <li><a href="#" class="hover:underline">About</a></li>
+              <li><a href="#" class="hover:underline">Contact</a></li>
+              <li><a href="#" class="hover:underline">FAQs</a></li>
+            </ul>
+          </div>
+          <!-- Contact Us -->
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+            <ul class="text-sm space-y-2">
+              <li>
+                Email:
+                <a href="mailto:support@example.com" class="hover:underline"
+                  >support@example.com</a
+                >
+              </li>
+              <li>
+                Phone:
+                <a href="tel:+1234567890" class="hover:underline"
+                  >+1 234 567 890</a
+                >
+              </li>
+              <li>Address: 1234 Market St, San Francisco, CA 94103</li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-8 border-t border-gray-700 pt-4">
+          <p class="text-center text-sm text-gray-400">
+            © 2024 Your Company. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.querySelector('button').addEventListener('click', () => {
+        document.getElementById('mobile-menu').classList.toggle('hidden');
+      });
+    </script>
   </body>
 </html>
