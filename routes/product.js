@@ -3,7 +3,7 @@ var router = express.Router();
 var User = require('../models/user');
 var Product = require('../models/product');
 
-// single user
+// single product
 router.get('/:id', (req, res, next) => {
   var { userId } = req.session;
   var productId = req.params.id;
@@ -31,21 +31,16 @@ router.get('/', (req, res, next) => {
 });
 
 // new product
-router.get('/new', (req, res, next) => {
-  var { userId } = req.session;
-  User.findById(userId)
-    .then((user) => {
-      if (!user || !user.isAdmin) return next(err);
-      res.render('createProduct');
-    })
-    .catch((err) => next(err));
-});
-
 router.post('/', (req, res, next) => {
   var { userId } = req.session;
+  var { name, quantity, price } = req.body;
   User.findById(userId)
     .then((user) => {
       if (!user || !user.isAdmin) return next(err);
+      if (!name || !quantity || !price) {
+        req.flash('error', 'Please fill the details');
+        return res.redirect('/users/admin');
+      }
       Product.create(req.body)
         .then((product) => res.redirect('/products'))
         .catch((err) => next(err));
@@ -107,12 +102,14 @@ router.get('/:id/cart', (req, res, next) => {
             { $push: { cart: product.id } },
             { new: true }
           )
-            .then((users) => res.redirect('users/cart'))
+            .then((users) => res.redirect('/products'))
             .catch((err) => next(err));
         })
         .catch((err) => next(err));
     })
     .catch((err) => next(err));
 });
+
+router.get('/:id/cart/delete');
 
 module.exports = router;

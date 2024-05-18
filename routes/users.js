@@ -58,13 +58,31 @@ router.post('/login', (req, res, next) => {
       } else {
         req.session.userId = user.id;
         if (user.isAdmin) {
-          res.render('adminDashboard');
+          return res.redirect('/users/admin');
         } else {
-          res.redirect('/products/');
+          return res.redirect('/products/');
         }
       }
     });
   });
+});
+
+// admin
+router.get('/admin', (req, res, next) => {
+  var { userId } = req.session;
+  User.findById(userId)
+    .then((users) => {
+      if (!users) return next(err);
+      var error = req.flash('error');
+      res.render('adminDashboard', { error });
+    })
+    .catch((err) => next(err));
+});
+
+// logout
+router.get('/logout', (req, res, next) => {
+  req.session.destroy((err) => next(err));
+  res.redirect('/users');
 });
 
 // cart

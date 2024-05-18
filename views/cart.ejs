@@ -11,5 +11,37 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body></body>
+  <body>
+    <section>
+      <div class="container mx-auto">
+        <div class="flex flex-wrap">
+          <ul>
+            <% users.cart.forEach(product =>{ %>
+            <li class="px-10 py-8 border rounded my-10 border-blue-600">
+              <div class="border rounded border-gray-500 p-3 pb-4 w-full">
+                <i class="fa-regular fa-image"></i>
+              </div>
+              <h3 class="text-xl font-extrabold pb-2 uppercase">
+                <%= product.name %>
+              </h3>
+              <h3 class="text-blue-600 text-2xl text-center pb-3">
+                $<%= product.price %>
+              </h3>
+              <a
+                href="/users/cart"
+                class="bg-blue-600 text-white ml-2 p-2 rounded"
+                >Buy</a
+              >
+              <a
+                href="/products/<%= product._id %>/cart/delete"
+                class="bg-blue-600 text-white ml-2 p-2 rounded"
+                >Remove</a
+              >
+            </li>
+            <% }) %>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </body>
 </html>
