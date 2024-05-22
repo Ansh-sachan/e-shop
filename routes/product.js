@@ -110,6 +110,8 @@ router.get('/:id/cart', (req, res, next) => {
     .catch((err) => next(err));
 });
 
-router.get('/:id/cart/delete');
+// router.get('/:id/cart/delete',(req,res,next)=>{
+
+// });
 
 module.exports = router;
