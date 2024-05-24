@@ -7,5 +7,93 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body></body>
+  <body>
+    <form
+      action="/products/<%= product.id %>/edit"
+      method="POST"
+      class="max-w-md mx-auto mt-8 p-6 bg-white shadow-md rounded-lg"
+    >
+      <div class="mb-4">
+        <label for="name" class="block text-gray-700 text-sm font-bold mb-2"
+          >Name</label
+        >
+        <div class="relative">
+          <input
+            class="appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-indigo-500"
+            type="text"
+            placeholder="Product Name"
+            name="name"
+            id="name"
+            value="<%= product.name %>"
+          />
+          <div
+            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+          >
+            <i class="fas fa-envelope text-gray-400"></i>
+          </div>
+          <div
+            class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none"
+          >
+            <i class="fas fa-check text-gray-400"></i>
+          </div>
+        </div>
+      </div>
+      <div class="mb-4">
+        <label for="quantity" class="block text-gray-700 text-sm font-bold mb-2"
+          >Quantity</label
+        >
+        <div class="relative">
+          <input
+            class="appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-indigo-500"
+            type="number"
+            placeholder="Quantity"
+            name="quantity"
+            id="quantity"
+            value="<%= product.quantity %>"
+          />
+          <div
+            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+          >
+            <i class="fas fa-envelope text-gray-400"></i>
+          </div>
+          <div
+            class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none"
+          >
+            <i class="fas fa-check text-gray-400"></i>
+          </div>
+        </div>
+      </div>
+      <div class="mb-6">
+        <label for="price" class="block text-gray-700 text-sm font-bold mb-2"
+          >Price</label
+        >
+        <div class="relative">
+          <input
+            class="appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-indigo-500"
+            type="number"
+            placeholder="price"
+            name="price"
+            id="price"
+            value="<%= product.price %>"
+          />
+          <div
+            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+          >
+            <i class="fas fa-lock text-gray-400"></i>
+          </div>
+        </div>
+      </div>
+      <% if(error){ %>
+      <span class="text-red-600 my-2 text-xl mb-2"><%= error %></span>
+      <% } %>
+      <div class="flex items-center justify-between">
+        <button
+          class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          type="submit"
+        >
+          Edit product
+        </button>
+      </div>
+    </form>
+  </body>
 </html>

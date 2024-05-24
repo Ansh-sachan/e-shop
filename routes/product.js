@@ -3,19 +3,6 @@ var router = express.Router();
 var User = require('../models/user');
 var Product = require('../models/product');
 
-// single product
-router.get('/:id', (req, res, next) => {
-  var { userId } = req.session;
-  var productId = req.params.id;
-  Product.findById(productId)
-    .then((product) => {
-      User.findById(userId)
-        .then((user) => res.render('singleUser', { product, user }))
-        .catch((err) => next(err));
-    })
-    .catch((err) => next(err));
-});
-
 // all product
 router.get('/', (req, res, next) => {
   var { userId } = req.session;
@@ -31,6 +18,10 @@ router.get('/', (req, res, next) => {
 });
 
 // new product
+router.get('/new', (req, res, next) => {
+  var error = req.flash('error');
+  return res.render('createProduct', { error });
+});
 router.post('/', (req, res, next) => {
   var { userId } = req.session;
   var { name, quantity, price } = req.body;
@@ -39,7 +30,7 @@ router.post('/', (req, res, next) => {
       if (!user || !user.isAdmin) return next(err);
       if (!name || !quantity || !price) {
         req.flash('error', 'Please fill the details');
-        return res.redirect('/users/admin');
+        return res.redirect('/products/new');
       }
       Product.create(req.body)
         .then((product) => res.redirect('/products'))
@@ -47,17 +38,26 @@ router.post('/', (req, res, next) => {
     })
     .catch((err) => next(err));
 });
+// single product
+router.get('/:id', (req, res, next) => {
+  var { userId } = req.session;
+  var productId = req.params.id;
+  Product.findById(productId)
+    .then((product) => {
+      User.findById(userId)
+        .then((user) => res.render('singleProduct', { product, user }))
+        .catch((err) => next(err));
+    })
+    .catch((err) => next(err));
+});
 
 // edit form
 router.get('/:id/edit', (req, res, next) => {
-  var productId = req.params.id;
-  var { userId } = req.session;
-  User.findById(userId)
-    .then((user) => {
-      if (user.isAdmin && user) return next(err);
-      Product.findById(productId)
-        .then((product) => res.render('edit', product))
-        .catch((err) => next(err));
+  var id = req.params.id;
+  Product.findById(id)
+    .then((product) => {
+      var error = req.flash('error');
+      return res.render('edit', { product, error });
     })
     .catch((err) => next(err));
 });
@@ -65,8 +65,13 @@ router.get('/:id/edit', (req, res, next) => {
 router.post('/:id/edit', (req, res, next) => {
   var { userId } = req.session;
   var productId = req.params.id;
+  var { name, price, quantity } = req.body;
   User.findById(userId).then((user) => {
     if (!user || !user.isAdmin) return next(err);
+    if ((!name, !price, !quantity)) {
+      req.flash('error', 'Fill the required fields');
+      return res.redirect(`/${id}/edit`);
+    }
     Product.findByIdAndUpdate(productId, req.body, { new: true })
       .then((product) => res.redirect('/products/' + productId))
       .catch((err) => next(err));
@@ -76,7 +81,7 @@ router.post('/:id/edit', (req, res, next) => {
 // like
 router.get('/:id/like', (req, res, next) => {
   var id = req.params.id;
-  Product.findByIdAndUpdate(id, { $inc: { like: 1 } })
+  Product.findByIdAndUpdate(id, { $inc: { likes: 1 } })
     .then((product) => res.redirect('/products/' + id))
     .catch((err) => next(err));
 });
@@ -85,7 +90,7 @@ router.get('/:id/like', (req, res, next) => {
 router.get('/:id/delete', (req, res, next) => {
   var id = req.params.id;
   Product.findByIdAndDelete(id)
-    .then((product) => res.redirect('/products/' + id))
+    .then((product) => res.redirect('/products'))
     .catch((err) => next(err));
 });
 

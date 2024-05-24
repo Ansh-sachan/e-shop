@@ -53,8 +53,7 @@
               href="/users/admin"
               class="bg-blue-600 text-white rounded px-3 py-1 mx-2"
             >
-              Add product
-              <span class="text-xl">+</span>
+              Dashboard
             </a>
             <% } %>
             <a
@@ -176,10 +175,10 @@
     <!-- products section -->
     <section>
       <div class="container mx-auto">
-        <div class="flex flex-wrap">
-          <ul>
+        <div>
+          <ul class="flex flex-wrap justify-evenly">
             <% products.forEach(product =>{ %>
-            <li class="px-10 py-8 border rounded my-10 border-blue-600">
+            <li class="px-10 py-8 border rounded my-10 shadow-md">
               <div class="border rounded border-gray-500 p-3 pb-4 w-full">
                 <i class="fa-regular fa-image"></i>
               </div>
@@ -189,6 +188,11 @@
               <h3 class="text-blue-600 text-2xl text-center pb-3">
                 $<%= product.price %>
               </h3>
+              <a
+                href="/products/<%= product.id %>"
+                class="bg-blue-600 text-white ml-2 p-2 rounded"
+                >view</a
+              >
               <a
                 href="/products/<%= product.id %>/cart"
                 class="bg-blue-600 text-white ml-2 p-2 rounded"
