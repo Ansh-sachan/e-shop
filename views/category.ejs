@@ -1,18 +1,5 @@
 <%- include('partials/header') -%>
-<!-- products section -->
 <section>
-  <h1 class="font-extrabold text-xl text-blue-600 ml-3 my-4">Categories</h1>
-  <div class="my-5">
-    <% if(categories && categories.length){ categories.forEach(category=>{ %>
-    <a
-      href="/products/<%= category %>/single"
-      class="text-blue-500 border border-gray-600 rounded-lg p-1 ml-3"
-      ><%= category %></a
-    >
-    <% }) }else{ %>
-    <div></div>
-    <% } %>
-  </div>
   <div class="container mx-auto">
     <div>
       <ul class="flex flex-wrap justify-evenly">
@@ -43,5 +30,4 @@
     </div>
   </div>
 </section>
-
 <%- include('partials/footer') -%>

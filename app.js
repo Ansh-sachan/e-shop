@@ -9,7 +9,7 @@ var MongoStore = require('connect-mongo')(session);
 var flash = require('connect-flash');
 
 require('dotenv').config();
-
+var auth = require('./middlewares/auth');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var productsRouter = require('./routes/product');
@@ -40,6 +40,7 @@ app.use(
 );
 
 app.use(flash());
+app.use(auth.userInfo);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);

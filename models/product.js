@@ -7,6 +7,7 @@ var productSchema = new Schema(
     quantity: { type: Number, required: true },
     price: { type: Number, required: true },
     likes: { type: Number, default: 0 },
+    category: [String],
   },
   { timestamps: true }
 );

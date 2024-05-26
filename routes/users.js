@@ -70,11 +70,11 @@ router.post('/login', (req, res, next) => {
 // admin
 router.get('/admin', (req, res, next) => {
   var { userId } = req.session;
-  User.findById(userId)
+  User.find({})
     .then((users) => {
       if (!users) return next(err);
       var error = req.flash('error');
-      res.render('adminDashboard', { error });
+      res.render('adminDashboard', { error, users });
     })
     .catch((err) => next(err));
 });
@@ -94,4 +94,18 @@ router.get('/cart', (req, res, next) => {
     .then((users) => res.render('cart', { users }))
     .catch((err) => next(err));
 });
+// block and unbloack user
+router.get('/:id/block', (req, res, next) => {
+  var id = req.params.id;
+  User.findByIdAndUpdate(id, { isBlocked: true })
+    .then((user) => res.redirect('/users/admin'))
+    .catch((err) => next(err));
+});
+router.get('/:id/unblock', (req, res, next) => {
+  var id = req.params.id;
+  User.findByIdAndUpdate(id, { isBlocked: false })
+    .then((user) => res.redirect('/users/admin'))
+    .catch((err) => next(err));
+});
+
 module.exports = router;

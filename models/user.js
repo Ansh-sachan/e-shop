@@ -9,6 +9,7 @@ var userSchema = new Schema(
     password: { type: String, required: true, minlength: 4 },
     isAdmin: { type: Boolean, default: false },
     cart: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
+    isBlocked: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

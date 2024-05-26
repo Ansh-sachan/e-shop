@@ -26,6 +26,32 @@
         </div>
       </div>
     </nav>
-    <section></section>
+    <section>
+      <ul>
+        <% users.forEach(user=>{ %>
+        <li class="shadow-md rounded-lg flex justify-between p-4 m-4">
+          <div>
+            <h3 class="text-blue-600 capitalize font-bold"><%= user.name %></h3>
+            <h3>Email : <%= user.email %></h3>
+          </div>
+          <div>
+            <% if(user){ if(user.isBlocked){ %>
+            <a
+              href="/users/<%= user.id %>/unblock"
+              class="bg-green-500 text-white p-2"
+              >Unblock</a
+            >
+            <% }else{ %>
+            <a
+              href="/users/<%= user.id %>/block"
+              class="bg-red-500 rounded text-white p-2"
+              >Block</a
+            >
+            <% } } %>
+          </div>
+        </li>
+        <% }) %>
+      </ul>
+    </section>
   </body>
 </html>
